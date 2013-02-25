@@ -45,7 +45,7 @@ public class PSOAlgorithm
 			for (int d = 0; d < dims; d++)
 			{
 				particle.getPosition()[d] = min[d] + (max[d] - min[d]) * random.nextFloat();
-				particle.getBestPosition()[d] = particles[i].getPosition()[d];
+				particle.getBestPosition()[d] = particle.getPosition()[d];
 				float lo = -Math.abs(max[d] - min[d]);
 				float hi = Math.abs(max[d] - min[d]);
 				particle.getVelocity()[d] = lo + (hi - lo) * random.nextFloat();
@@ -107,8 +107,8 @@ public class PSOAlgorithm
 	public static void main (String[] args)
 	{
 		PSOAlgorithm swarm = new PSOAlgorithm(50, 
-		new float[]{-10.0f, -10.0f, -10.0f, -10.0f, -10.0f}, 
-		new float[]{10.0f, 10.0f, 10.0f, 10.0f, 10.0f},
+		new float[]{-100.0f, -100.0f, -100.0f, -100.0f, -100.0f}, 
+		new float[]{100.0f, 100.0f, 100.0f, 100.0f, 100.0f},
 		
 		new PSOFitnessDelegate(){
 			public float fitness(float[] position)
@@ -120,7 +120,7 @@ public class PSOAlgorithm
 			}
 		}, 0.6f, 1.3f, 1.3f);
 		
-		for (int k = 0; k < 100; k++)
+		for (int k = 0; k < 1000; k++)
 			swarm.step();
 	
 		for (int i = 0; i < swarm.bestGlobal.length; i++)
