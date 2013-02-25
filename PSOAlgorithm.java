@@ -81,18 +81,22 @@ public class PSOAlgorithm
 				vel[dim] = omega * vel[dim] + phiLocal * rp * dxLocal + phiGlobal * rg * dxGlobal;
 				pos[dim] += vel[dim];
 				
-				if (pos[dim] < min[dim]) pos[dim] = min[dim];
-				if (pos[dim] > max[dim]) pos[dim] = max[dim];
+				if (pos[dim] < min[dim]) 
+					pos[dim] = min[dim];
+				if (pos[dim] > max[dim]) 
+					pos[dim] = max[dim];
 
 			}
 		
 			float bestFit = delegate.fitness(bestPos);
-			if (delegate.fitness(pos) < bestFit)
+			float newFit = delegate.fitness(pos);
+			
+			if (newFit < bestFit)
 			{
 				for (int dim = 0; dim <  dims; dim++)
 					bestPos[dim] = pos[dim];
 				
-				if (bestFit < delegate.fitness(bestGlobal))
+				if (newFit < delegate.fitness(bestGlobal))
 					for (int dim = 0; dim <  dims; dim++)
 						bestGlobal[dim] = bestPos[dim];
 			}
@@ -102,7 +106,9 @@ public class PSOAlgorithm
 	
 	public static void main (String[] args)
 	{
-		PSOAlgorithm swarm = new PSOAlgorithm(50, new float[]{-5.0f, -10.0f, -20.0f}, new float[]{10.0f, 20.0f, 30.0f},
+		PSOAlgorithm swarm = new PSOAlgorithm(50, 
+		new float[]{-10.0f, -10.0f, -10.0f, -10.0f, -10.0f}, 
+		new float[]{10.0f, 10.0f, 10.0f, 10.0f, 10.0f},
 		
 		new PSOFitnessDelegate(){
 			public float fitness(float[] position)
@@ -114,7 +120,7 @@ public class PSOAlgorithm
 			}
 		}, 0.6f, 1.3f, 1.3f);
 		
-		for (int k = 0; k < 1000; k++)
+		for (int k = 0; k < 100; k++)
 			swarm.step();
 	
 		for (int i = 0; i < swarm.bestGlobal.length; i++)
