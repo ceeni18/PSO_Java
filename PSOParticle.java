@@ -1,33 +1,32 @@
 import java.util.Random;
 
-public class PSOParticle extends Particle
+public class PSOParticle
 {
-	private PointN bestPosition;
+	private int dims;
+	private float[] bestPosition;
+	private float[] position;
+	private float[] velocity;
 
-	public PSOParticle(float[] min, float[] max, Random random)
+	public PSOParticle(int dims)
 	{
-		super(min, max, random);
-		this.bestPosition = new PointN(min.length);
-		this.setBestPosition(this.getPosition().getPoints());
+		this.dims = dims;
+		this.bestPosition = new float[dims];
+		this.velocity = new float[dims];
+		this.position = new float[dims];
 	}
 
-	public void setBestPosition(float[] best)
+	public float[] getVelocity()
 	{
-		for (int i = 0; i < best.length; i++)
-			bestPosition.getPoints()[i] = best[i];
+		return this.velocity;
 	}
 
-	public String toString()
+	public float[] getPosition()
 	{
-		String str = super.toString();
-		str += "\nBest position:\n";		
-		str += bestPosition.toString();	
-		return str;
+		return this.position;
 	}
 
-	public static void main (String[] args)
+	public float[] getBestPosition()
 	{
-		PSOParticle p = new PSOParticle(new float[]{0.0f, 0.0f, 0.0f}, new float[]{1.0f, 2.0f, 3.0f}, new Random());
-		System.out.println(p);
+		return this.bestPosition;
 	}
 }
