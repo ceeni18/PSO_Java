@@ -20,7 +20,7 @@ public class PSOAlgorithm
 		this.min = min;
 		this.max = max;
 		
-		this.initSwarm();
+		initSwarm();
 	}
 
 	private void initSwarm()
