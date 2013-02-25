@@ -44,11 +44,11 @@ public class PSOAlgorithm
 			
 			for (int d = 0; d < dims; d++)
 			{
-				particles[i].getPosition()[d] = min[d] + (max[d] - min[d]) * random.nextFloat();
-				particles[i].getBestPosition()[d] = particles[i].getPosition()[d];
+				particle.getPosition()[d] = min[d] + (max[d] - min[d]) * random.nextFloat();
+				particle.getBestPosition()[d] = particles[i].getPosition()[d];
 				float lo = -Math.abs(max[d] - min[d]);
 				float hi = Math.abs(max[d] - min[d]);
-				particles[i].getVelocity()[d] = lo + (hi - lo) * random.nextFloat();
+				particle.getVelocity()[d] = lo + (hi - lo) * random.nextFloat();
 
 			}
 
